@@ -1,5 +1,5 @@
 package Recursion;
-
+//Leetcode Q. 50
 public class Powerx {
 
 	public static void main(String[] args) {
