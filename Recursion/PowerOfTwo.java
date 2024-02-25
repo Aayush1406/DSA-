@@ -3,7 +3,7 @@ package Recursion;
 public class PowerOfTwo {
 
 	public static void main(String[] args) {
-		int n = 27;
+		int n = Integer.MAX_VALUE;
 		int x = 3;
 		boolean ans  = isPowerOfX(n, x);
 		System.out.println("ans = "+ans);
