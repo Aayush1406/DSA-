@@ -1,0 +1,15 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+#include<string>
+
+
+int main() {
+    
+    int n = 37;
+    
+    n = n & 1;
+    
+    cout<<n;
+    
+}
