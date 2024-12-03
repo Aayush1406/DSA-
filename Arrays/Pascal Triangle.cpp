@@ -1,3 +1,6 @@
+// 1. start with i=1, j=1 and put the values eq 1 at start and end indices.
+// 2. for the middle indices compute combination (row_idx - 1, col_idx - 1)
+
 class Solution {
 public:
     vector<vector<int>> generate(int numRows) {
