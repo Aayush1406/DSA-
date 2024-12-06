@@ -1,35 +1,20 @@
-// 1. 3 var. n, max, sum
-// 2. see if sum + n <0
-// 3. compare it with max
-// 4. else sum+=n and comparew with max
+long long maxSubarraySum(vector<int> arr, int n)
+{
+    long long max = 0;
 
-class Solution {
-public:
-    int maxSubArray(vector<int>& nums) {
+    long long sum = 0;
 
-        int max = -(1<<30);
-        int sum = 0;
+    for(int i=0;i<n;i++){
 
-        if(nums.size()==1){
-            return nums[0];
+        sum = sum + arr[i];
+
+        if(sum<0){
+            sum = 0;
         }
-        for(int i=0;i<nums.size();i++){
-
-            int n = nums[i];
-
-            if(sum + n <0){
-                if(max<n){
-                  max = n;
-                }
-                sum = 0;
-            }else{
-                sum = sum + n;
-            if(max<sum){
-                max = sum;
-            }
-          } 
+        if(max<sum){
+            max = sum;
         }
-
-        return max;
     }
-};
+
+    return max;
+}
