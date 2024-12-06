@@ -1,85 +1,83 @@
-#include <iostream>
-#include <map>
-#include<algorithm>
 #include<bits/stdc++.h>
 using namespace std;
 
-void merge(int a[], int start, int end, int mid){
+void merge(int a[], int s, int e, int mid){
 
-    int ps1 = start, pe1 = mid; // start and end of the left sub arr.
+    int sls = s, els = mid, srs = mid+1, ers = e;
 
-    int size1 = pe1 - ps1 +1; // size of ls
+    int sizels = els-sls+1;
 
-    int ps2 = mid+1, pe2 = end; // start and end of the right sub arr.
+    int sizers = ers - srs + 1;
 
-    int size2 = pe2 - ps2 +1; // size of rs
+    int ls[sizels], rs[sizers];
 
-    int index = start;
+    int index = s;
 
-    int ls[size1];
-    int rs[size2];
+    for(int i=0;i<sizels;i++){
 
-    for(int i=0;i<size1;i++){
-        ls[i] = a[ps1+i];
+        ls[i] = a[sls+i];
     }
 
-    for(int i=0;i<size2;i++){
-        rs[i] = a[ps2+i];
+    for(int i=0;i<sizers;i++){
+
+        rs[i] = a[srs+i];
     }
 
-    int p1 = 0, p2 = 0;
-    int k = ps1;
-    while(p1<size1&&p2<size2){
+    int pls=0, prs=0, pa=s;
 
-        if(ls[p1]<rs[p2]){
-            a[k] = ls[p1];
-            p1++;
-            k++;
+    while(pls<sizels && prs<sizers){
+        if(ls[pls]<rs[prs]){
+            a[pa] = ls[pls];
+            pa++;
+            pls++;
         }else{
-            a[k] = rs[p2];
-            p2++;
-            k++;
+            a[pa] = rs[prs];
+            pa++;
+            prs++;            
         }
     }
 
-    if(p1<size1){
-        while(p1<size1){
-            a[k] = ls[p1];
-            k++;
-            p1++;
+    if(pls<sizels){
+        while(pls<sizels){
+            a[pa] = ls[pls];
+            pa++;
+            pls++;
         }
-    }
+    }    
 
-    if(p2<size2){
-        while(p2<size2){
-            a[k] = rs[p2];
-            k++;
-            p2++;
+    if(prs<sizers){
+        while(prs<sizers){
+            a[pa] = rs[prs];
+            pa++;
+            prs++;
         }
-    }
+    }    
 
 }
 
-void mergeSort(int a[], int start, int end){
+void mergeSort(int a[], int s, int e){
 
-    if(start == end){
+    if(s==e){
         return;
     }
 
-    int mid = (start + end)/2;
+    int mid = (s+e)/2;
 
-    mergeSort(a, start, mid);
-    mergeSort(a, mid+1, end);
-    merge(a,start,end,mid);
-
+    mergeSort(a,s,mid);
+    mergeSort(a,mid+1,e);
+    merge(a,s,e,mid);
 }
 
-int main() {
+int main(){
 
-    int a[7] = {5,4,3,2,1,1,1};
-    mergeSort(a,0,6); 
+    int a[] = {2,4,3,5,1};
+
+    mergeSort(a, 0, 4);
 
     for(int el:a){
         cout<<el<<endl;
     }
+
+    return 0;
+
 }
