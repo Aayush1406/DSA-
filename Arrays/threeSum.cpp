@@ -1,39 +1,41 @@
 #include<bits/stdc++.h>
-void twoSum(int t, vector<int>nums, int s, set<vector<int>> &st){
 
-    map<int,int> mpp;
-    vector<int> v2;
-    v2.clear();
-    for(int i=s;i<nums.size();i++){
-        int x = t - nums[i];
+void twoSum(int t, int s, vector<int> &arr, set<vector<int>> &st){
+
+    map<int, int> mpp;
+    vector<int> tmp;
+    for(int i=s;i<arr.size();i++){
+
+        int x = t - arr[i];
         auto it = mpp.find(x);
 
-        if(it==mpp.end()){
-            mpp[nums[i]] = i;
+        if(it == mpp.end()){
+            mpp[arr[i]] = i;
         }else{
-        
-            v2.push_back(nums[i]);
-            v2.push_back(x);
-            v2.push_back(-(t));
-            sort(v2.begin(),v2.end());
-            st.insert(v2);
-            v2.clear();
+            tmp.push_back(x);
+            tmp.push_back(-(t));
+            tmp.push_back(arr[i]);
+            sort(tmp.begin(),tmp.end());
+
+            st.insert(tmp);
+            tmp.clear();
         }
     }
-
 }
 
-vector<vector<int>> triplet(int n, vector<int> &nums)
+vector<vector<int>> triplet(int n, vector<int> &arr)
 {
-      set<vector<int>> st;
-        for(int i=0;i<n;i++){
+    
+    set<vector<int>> st;
+    for(int i=0;i<n;i++){
+        int num = arr[i];
 
-            int n1 = nums[i];
-            int n2 = - (n1);
-            twoSum(n2,nums,i+1,st);
+        int t = -(num);
 
-        }
+        twoSum(t,i+1,arr,st);
+    }
 
-        vector<vector<int>> v1(st.begin(), st.end());
-        return v1;
+    vector<vector<int>> v(st.begin(),st.end());
+
+    return v;
 }
