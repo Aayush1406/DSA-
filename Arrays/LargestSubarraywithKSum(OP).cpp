@@ -1,3 +1,5 @@
+int maxLen(vector<int>& arr) {
+
         map<int, int> mpp;
         int len = 0, maxlen = 0;
         int sum = 0, k = 0;
@@ -18,3 +20,6 @@
             }
             
         }
+        
+        return maxlen;
+    }
