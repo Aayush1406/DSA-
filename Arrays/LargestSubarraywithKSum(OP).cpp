@@ -1,26 +1,20 @@
-#include<vector>
-#include<bits/stdc++.h>
-int getLongestZeroSumSubarrayLength(vector<int> &arr){
-	
-	map<int, int> mpp;
-	mpp[0]=-1;
-	int sum = 0, k=0,len=0,maxlen=0;
-	for(int i=0;i<arr.size();i++){
+        map<int, int> mpp;
+        int len = 0, maxlen = 0;
+        int sum = 0, k = 0;
+        
+        mpp[0] = -1; 
+        for(int i=0;i<arr.size();i++){
+            
+            sum +=arr[i];
 
-		sum +=arr[i];
+            if(mpp.find(sum-k)!=mpp.end()){
+                len = i - mpp[sum-k];
 
-		if(sum==k){
-			len = i - mpp[0];
-			maxlen = max(len,maxlen);
-		}else if(mpp.find(sum-k)==mpp.end()){
-			mpp[sum] = i;
-		}else{
-			len = i - mpp[sum-k];
-			maxlen  = max(len,maxlen);
-		}
-		
+                maxlen = max(len,maxlen);
+            }
 
-	}
-
-	return maxlen;
-}
+            if(mpp.find(sum)==mpp.end()){
+                mpp[sum] = i;
+            }
+            
+        }
