@@ -1,47 +1,30 @@
-// 1. loop reverse
-// 2. find the first dip and get the index.
-// 3. Again loop reverse and find just greater than the found index and swap both of them.
-// 4. reverse the other part of the array (after index + 1)
-
-#include <algorithm>
 class Solution {
 public:
     void nextPermutation(vector<int>& nums) {
+        int index=-1, breakpointindex = -1;
+        for(int i=nums.size()-1;i>0;i--){
+
+            if(nums[i-1]<nums[i]){
+                breakpointindex = i-1;
+                index = findjustlarge(nums.size()-1, breakpointindex+1, nums[i-1], nums);
+                swap(nums[index], nums[breakpointindex]);
+                break;
+            }
+        }
+
+        reverse(nums.begin()+breakpointindex+1, nums.end());
+        
+    }
+
+    int findjustlarge(int s, int e, int t, vector<int>& nums){
         int index = -1;
-        for(int i=nums.size()-2;i>=0;i--){ 
-
-            if(nums[i]<nums[i+1]){ 
-
+        for(int i=s;i>=e;i--){
+            if(nums[i]>t){
                 index = i;
                 break;
             }
-        }        
-
-        if(index == -1){
-            reverse(nums.begin(),nums.end());
-        }else{
-            findJustGreater(nums,index);
-        }
-    }
-
-    void findJustGreater(vector<int>&nums, int index){
-
-        int justgreater = -1;    
-        for(int i=nums.size()-1;i>index;i--){
-            if(nums[index]<nums[i]){
-                
-                swap(nums,index,i);
-                break;
-            }
         }
 
-        reverse(nums.begin()+index+1,nums.end());
-    }
-
-    void swap(vector<int>&nums, int x, int y){
-
-        int tmp = nums[x];
-        nums[x] = nums[y];
-        nums[y] = tmp;
+        return index;
     }
 };
