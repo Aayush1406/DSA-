@@ -1,20 +1,28 @@
-long long maxSubarraySum(vector<int> arr, int n)
-{
-    long long max = 0;
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
 
-    long long sum = 0;
+        int max = 1<<31;
+        int sum = 0;
 
-    for(int i=0;i<n;i++){
+        for(int i=0;i<nums.size();i++){
 
-        sum = sum + arr[i];
+            sum = sum + nums[i];
 
-        if(sum<0){
-            sum = 0;
+            if(sum <0){
+                if(max<sum){
+                    max = sum;
+                }                                
+                sum = 0;
+
+            }else{
+                
+                if(max<sum){
+                    max = sum;
+                }
+            }
         }
-        if(max<sum){
-            max = sum;
-        }
+
+        return max;    
     }
-
-    return max;
-}
+};
