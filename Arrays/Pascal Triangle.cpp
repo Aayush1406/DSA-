@@ -1,36 +1,35 @@
-// 1. start with i=1, j=1 and put the values eq 1 at start and end indices.
-// 2. for the middle indices compute combination (row_idx - 1, col_idx - 1)
-
 class Solution {
 public:
     vector<vector<int>> generate(int numRows) {
 
-        vector<vector<int>> m;
+        vector<vector<int>> v1;
         for(int i=1;i<=numRows;i++){
-            vector<int> v;
+            vector<int> v2;
             for(int j=1;j<=i;j++){
-                if(i==j||j==1){
-                    v.push_back(1);
-                }else{
-                int res = compute(i-1,j-1);
-                v.push_back(res);
-                }
+                int el = findelement(i,j);
+                v2.push_back(el);
             }
 
-            m.push_back(v);
+            v1.push_back(v2);
         }
 
-        return m;
+        return v1;    
     }
 
-    int compute(int n, int r){
-        int res = 1;
+    int findelement(int r,int c){
+        if(c==1 || c==r){
+            return 1;
+        }else{
+            r-=1,c-=1;
+            int ans = 1;
+            int index = 1;
+            for(int i=0;i<c;i++){
+                ans = ans * (r-i)/(index);
+                index++;
+            }
 
-        for(int i=0;i<r;i++){
-    
-            res = res * (n-i) / (i+1);
+            return ans;
         }
-
-        return res;
+    
     }
 };
