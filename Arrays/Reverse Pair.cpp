@@ -2,92 +2,83 @@ class Solution {
 public:
     int cnt = 0;
     int reversePairs(vector<int>& nums) {
-
-        mergeSort(nums, 0, nums.size()-1);
+        
+        mergesort(nums,0,nums.size()-1);
         return cnt;
     }
 
-    void countPairs(vector<int> &a, int s, int e, int mid) {
-        int sls = s, els = mid, srs = mid + 1, ers = e;
+    void mergesort(vector<int> &nums, int s, int e){
 
-        for (int i = sls; i <= els; i++) {
-            while (srs <= ers && (long long)a[i] > 2 * (long long)a[srs]) {
-                
-                srs++;
-                
+        if(s>=e){
+            return;
+        }
+
+        int mid = (s+e)/2;
+        mergesort(nums, s, mid);
+        mergesort(nums, mid+1, e);
+        countPairs(nums,s,e,mid);
+        merge(nums, s, e, mid);
+    }
+
+    void countPairs(vector<int> &nums, int s, int e, int mid){
+        int p1 = s, els = mid, p2 = mid+1, ers = e;
+
+        while(p1<=els && p2<=ers){
+
+            if(nums[p1]>(long long)2*nums[p2]){
+                cnt += mid - p1 + 1;
+                p2++;
+            }else{
+
+                p1++;
             }
-
-            cnt = cnt + srs - (mid+1);
         }
     }
 
+    void merge(vector<int> &nums, int s, int e, int mid){
 
-void merge(vector<int> &a, int s, int e, int mid){
-
-    int sls = s, els = mid, srs = mid+1, ers = e;
-
-    int sizels = els-sls+1;
-
-    int sizers = ers - srs + 1;
-
-    int ls[sizels], rs[sizers];
-
-    int index = s;
-
-    for(int i=0;i<sizels;i++){
-
-        ls[i] = a[sls+i];
-    }
-
-    for(int i=0;i<sizers;i++){
-
-        rs[i] = a[srs+i];
-    }
-
-    int pls=0, prs=0, pa=s;
-
-    while(pls<sizels && prs<sizers){
-        if(ls[pls]<rs[prs]){
-            a[pa] = ls[pls];
-            pa++;
-            pls++;
-        }else{
-            a[pa] = rs[prs];
-            pa++;
-            prs++;            
+        int sizels = mid-s+1, sizers = e-(mid+1) +1;
+        int ls[sizels], rs[sizers];
+        int sls = s, srs = mid+1;
+        for(int i=0;i<sizels;i++){
+            ls[i] = nums[sls];
+            sls++;
         }
-    }
 
-    if(pls<sizels){
-        while(pls<sizels){
-            a[pa] = ls[pls];
-            pa++;
-            pls++;
+        for(int i=0;i<sizers;i++){
+            rs[i] = nums[srs];
+            srs++;
         }
-    }    
 
-    if(prs<sizers){
-        while(prs<sizers){
-            a[pa] = rs[prs];
-            pa++;
-            prs++;
+        int p1 = 0, p2 = 0, index = s;
+
+        while(p1<sizels && p2<sizers){
+            if(ls[p1]<rs[p2]){
+                nums[index] = ls[p1];
+                p1++;
+                index++;
+            }else{
+                nums[index] = rs[p2];
+                p2++;
+                index++;
+            }
         }
-    }    
 
-}
+        if(p1<sizels){
+            while(p1<sizels){
+                nums[index] = ls[p1];
+                p1++;
+                index++;
+            }
+        }
 
-void mergeSort(vector<int> &a, int s, int e){
-
-    if(s==e){
-        return;
+        if(p2<sizers){
+            while(p2<sizers){
+                nums[index] = rs[p2];
+                p2++;
+                index++;
+            }
+        }
+        
     }
-
-    int mid = (s+e)/2;
-
-    mergeSort(a,s,mid);
-    mergeSort(a,mid+1,e);
-    countPairs(a,s,e,mid);
-    merge(a,s,e,mid);
-}
-
 };
