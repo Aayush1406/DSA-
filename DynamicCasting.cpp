@@ -4,6 +4,9 @@
 
 // Upcasting - converting a derived class ptr to the base class ptr. It is always safe.
 
+//static_cast - happens at compile time.
+//dynamic_cast - happens at runtime. (we need virtual keyword to support runtime polymorphism).
+
 #include<iostream>
 
 using namespace std;
