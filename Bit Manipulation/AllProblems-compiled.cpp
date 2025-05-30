@@ -349,6 +349,22 @@ int cnt_bit_flips(int n1, int n2){
     return cnt;
 }
 
+ // Minimum Flips to Make n1 OR n2 Equal to n3 (Leetcode - 1318)
+int fun(int n1, int n2, int n3){
+    
+    int tmp = n1 | n2;
+    int res = n3 ^ tmp;
+    int cnt = 0;
+    while(res != 0){
+        if((res&1)==1) cnt++;
+
+        res >>=1;
+    }
+    
+    return cnt;
+}
+
+
 int main(){
 
 //    int n = 10;
