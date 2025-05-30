@@ -26,15 +26,16 @@ void check_signs_of_two_num_2(int a, int b){
 }
 
 // swap 2 numbers without third variable
-void swap_num(int a, int b){    
+// This is pass by pointer
+void swap_num(int *a, int *b){    
 
-    cout<<"a = "<<a<<" b ="<<b<<endl;
+    cout<<"*a = "<<a<<"*b ="<<b<<endl;
 
-    a = a ^ b;
-    b = a ^ b;
-    a = a ^ b;
+    *a = *a ^ *b;
+    *b = *a ^ *b;
+    *a = *a ^ *b;
 
-    cout<<"a = "<<a<<" b ="<<b<<endl;
+    cout<<"*a = "<<a<<"*b ="<<b<<endl;
 }
 
 // turn "OFF" Kth bit in a number
