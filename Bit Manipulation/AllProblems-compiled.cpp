@@ -264,8 +264,8 @@ void swap_adjacent_bits(int n){
 // Do circular right shift
 void circular_right_shift(int a, int k){
     k = k%32; // This is very imp, when we have k larger than 32.
-    int k_bits = a<<(32-k);
-    int without_k_bits = a>>k;
+    int k_bits = a<<(32-k); // shifting first k bits to the last
+    int without_k_bits = a>>k; // doing reg. right shift by k times.
 
     cout<<(k_bits|without_k_bits);
     
