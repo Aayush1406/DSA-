@@ -334,6 +334,20 @@ void find_duplicate_el_2(int a[], int n){
 
     cout<<x;
 }
+// cnt no of bit flips to convert to a particular number. n1->n2
+int cnt_bit_flips(int n1, int n2){
+    
+    int res = n1 ^ n2;
+    int cnt = 0;
+    while(res != 0){
+        if((res&1) == 1){
+            cnt++;
+        }
+        res >>=1;
+    }
+    
+    return cnt;
+}
 
 int main(){
 
