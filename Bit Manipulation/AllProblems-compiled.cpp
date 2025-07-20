@@ -281,7 +281,7 @@ void circular_left_shift(int a, int k){
     
 }
 
-// find missing number in array
+// find missing number in array - Actual array size = n + 1. So the actual sum will be ((n+1) * (n+2)) / 2. ans = cursum - actual sum
 void find_missing_number_in_array(int a[], int n){
 
     int x = 0;
