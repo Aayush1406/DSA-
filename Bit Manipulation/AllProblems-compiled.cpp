@@ -349,6 +349,34 @@ int cnt_bit_flips(int n1, int n2){
     return cnt;
 }
 
+void fun(){
+
+    unsigned int num = 0x1A2B3C4D; // 1A - 8 bit | 2B - 8 bit | 3C - 8 bit | 4D - 8 bit
+// r = 1A, g = 2B, b = 3C, a = 4D
+
+    int r = num>>24;
+
+    int g = num>>16 & 0xFF;
+
+    int b = num>>8 & 0xFF;
+
+    int a = num & 0xFF;
+
+    cout<<hex<<r<<endl;
+    cout<<hex<<g<<endl;
+    cout<<hex<<b<<endl;
+    cout<<hex<<a<<endl;
+
+// change green = CD
+
+    int zeromask = 0xFF;
+    num = num & ~(zeromask<<16);
+    int replacedVal = 0xCD;
+    num = num | replacedVal<<16;
+
+    cout<<hex<<num<<endl;
+}
+
  // Minimum Flips to Make n1 OR n2 Equal to n3 (Leetcode - 1318)
 int fun(int n1, int n2, int n3){
     
@@ -429,3 +457,4 @@ int main(){
     return 0;
 
 }
+
