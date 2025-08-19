@@ -349,7 +349,7 @@ int cnt_bit_flips(int n1, int n2){
     return cnt;
 }
 
-void fun(){
+void extractEightBitColors(){
 
     unsigned int num = 0x1A2B3C4D; // 1A - 8 bit | 2B - 8 bit | 3C - 8 bit | 4D - 8 bit
 // r = 1A, g = 2B, b = 3C, a = 4D
@@ -457,4 +457,5 @@ int main(){
     return 0;
 
 }
+
 
