@@ -132,6 +132,13 @@ void check_power_of_2(int a){
     else cout<<"False";
 }
 
+// check if a number is multiple of 2.
+bool check_multiple_of_2(int a){
+
+    if((a & 1)==0) return true;
+    else return false;
+}
+
 // check if it a power of k
 void check_power_of_k(int a, int k){
     bool flag = true;
@@ -457,5 +464,6 @@ int main(){
     return 0;
 
 }
+
 
 
